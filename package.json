@@ -4,8 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "tsx watch src/server.ts",
+    "start": "node dist/server.js",
+    "build": "tsc",
+    "migrate": "npx prisma migrate dev",
+    "generate": "npx prisma generate"
   },
+  "prisma": {
+    "seed": "tsx prisma/seed.ts"
+},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/arwanasir/week3-tasks-api.git"
@@ -13,7 +20,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
+  "type": "module",
   "bugs": {
     "url": "https://github.com/arwanasir/week3-tasks-api/issues"
   },
@@ -24,6 +31,7 @@
     "fastify": "^5.8.4"
   },
   "devDependencies": {
+    "@types/node": "^25.5.0",
     "dotenv": "^17.3.1",
     "prisma": "^6.12.0"
   }

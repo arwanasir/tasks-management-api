@@ -55,7 +55,7 @@ export async function getTaskById(id:string):Promise<Task|null>{
    
 };
 
-export async function updateTask(id:string, title?:string,status?:string):Promise<Task | null >{
+export async function updateTask(id:string, title?:string,status?:string):Promise<Task | null>{
     try{
         const update = await prisma.task.update({
         where:{id},

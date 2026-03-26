@@ -2,8 +2,8 @@
 //   // Visit https://aka.ms/tsconfig to read more about this file
 //   "compilerOptions": {
 //     // File Layout
-//     "rootDir": "./src",
-//     "outDir": "./dist",
+    // "rootDir": "./src",
+    // "outDir": "./dist",
 //     "moduleResolution": "NodeNext",
 //     "esModuleInterop": true,
 //     "allowSyntheticDefaultImports": true,
@@ -50,7 +50,7 @@
 // }
 {
   "compilerOptions": {
-    "rootDir": "./src",
+    "rootDir": "./",
     "outDir": "./dist",
     "moduleResolution": "nodenext",
     "esModuleInterop": true,
@@ -65,8 +65,8 @@
     "types": ["node"],
     "baseUrl": ".",
     "paths": {
-      "@prisma/client": ["node_modules/@prisma/client"]
+      "@prisma/client": ["./generated/prisma"]
 } 
   },
-  "include": ["src/**/*"]
+  "include": ["src/**/*", "prisma.config.ts", "prisma/seed.ts"]
 }

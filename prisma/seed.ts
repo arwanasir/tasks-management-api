@@ -1,7 +1,7 @@
+// import prisma from '../src/prisma/client.js';
+import { PrismaClient } from "generated/prisma/index.js";
 
-// use this command to run it "npx prisma db seed"
-
-import prisma from '../src/prisma/client';
+const prisma = new PrismaClient();
 async function main(){
     const user = await prisma.user.upsert({
         where:{email:'abc@example.com'},
@@ -11,12 +11,12 @@ async function main(){
             name:'abc'
         },
     });
-    console.log(`created a user ${user.name} (ID: ${user.id})`)
+    console.log(`user created ${user.name} (ID: ${user.id})`);
 };
 
-main().catch((e)=>{
+main().catch((e) =>{
     console.error(e);
     process.exit(1);
 }).finally(async()=>{
     await prisma.$disconnect();
-});
+})

@@ -18,3 +18,24 @@ const start = async ()=>{
 };
 
 start();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// curl -X POST http://localhost:3000/tasks \
+    //  -H "Content-Type: application/json" \
+    //  -d '{"title": "Complete Week 3 Demo", "description": "Show execution using cURL"}'
+
+
+    // curl -X GET http://localhost:3000/tasks

@@ -7,8 +7,8 @@ export async function create(title:string,userId:string, description?:string):Pr
         const task = await prisma.task.create({
         data:{
             title,
-            description,
             userId,
+            description
         }
     });
     return task;
@@ -17,10 +17,9 @@ export async function create(title:string,userId:string, description?:string):Pr
     catch(e){
         console.error(e);
         return null;
-    };
-
-};
     
+
+}};
 
 export async function listTasks(userId:string,status?:string):Promise<Task[]>{
     
@@ -85,3 +84,52 @@ export async function deleteTask(id:string):Promise<Task | null>{
         return null;
     };
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// curl -X POST http://localhost:3000/tasks -H "Content-Type: application/json" -d "{\"title\": \"Finish Demo\", \"content\": \"Recording Week 3\", \"userId\": \"b796c9df-8997-4d6b-8a6b-ab812769f91a\"}"
+
+
+
+
+// curl -X POST http://localhost:3000/tasks \
+//      -H "Content-Type: application/json" \
+//      -d '{
+//        "title": "Finish Demo", 
+//        "userId": "b796c9df-8997-4d6b-8a6b-ab812769f91a"
+//        "description": "Recording the Week 3 project execution",
+       
+//      }'
+
+
+//      curl -X POST http://localhost:3000/tasks \
+//      -H "Content-Type: application/json" \
+//      -d "{
+//        \"title\": \"Week 3 Task\", 
+//        \"description\": \"Execution properly demonstrated\", 
+//        \"userId\": \"b796c9df-8997-4d6b-8a6b-ab812769f91a\"
+//      }"

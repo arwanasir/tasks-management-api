@@ -11,7 +11,7 @@ export default defineConfig({
     seed: 'npx tsx ./prisma/seed.ts',
   },
   datasource: {
-    url: env("DATABASE_URL"),
+    url: String(process.env.DATABASE_URL),
   },
 });
 // import { defineConfig } from '@prisma/config';

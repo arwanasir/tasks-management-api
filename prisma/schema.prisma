@@ -11,6 +11,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
+ 
   
 }
 
@@ -20,10 +21,10 @@ model User{
   name         String?        
   createdAt    DateTime   @default(now())
   updatedAt    DateTime   @updatedAt
-  tasks        Task[]
+  tasks        Task[]  
 
 }
-
+ 
 model Task{
   id           String      @id @default(uuid())
   title        String    
@@ -35,3 +36,4 @@ model Task{
   userId       String      
   user         User        @relation(fields:[userId] , references: [id])
 }
+

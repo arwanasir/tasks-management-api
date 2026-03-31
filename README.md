@@ -1,4 +1,4 @@
-# week3-tasks-api
+# tasks-management-api
 
 # Week 4: Tasks API with Authentication & Authorization
 

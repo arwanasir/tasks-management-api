@@ -1,8 +1,17 @@
 import { FastifyInstance } from "fastify";
-import { createTaskSchema,getTaskSchema,getByIdSchema,putTaskSchema,deleteTaskSchema } from "src/schema/schema.js";
-import { createTaskHandler,listTaskHandler,getByIdHandler,updateTaskHandler,deleteTaskHandler } from "src/schema/handler.js";
+import { createTaskSchema,getTaskSchema,getByIdSchema,putTaskSchema,deleteTaskSchema } from "src/tasks/schema/schema.js";
+import { createTaskHandler,listTaskHandler,getByIdHandler,updateTaskHandler,deleteTaskHandler } from "src/tasks/schema/handler.js";
 
 export async function taskRoutes(fastify:FastifyInstance){
+    fastify.addHook('onRequest',async(request,reply)=>{
+        try{
+            await request.jwtVerify();
+        }
+        catch(e){
+            reply.code(401).send({error:'unauthorized. please log in!'})
+
+        }
+    })
     fastify.route({
         method:'POST',
         url:'/tasks',

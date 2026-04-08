@@ -55,13 +55,13 @@
     "moduleResolution": "nodenext",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
+    "ignoreDeprecations": "6.0",
 
     "module": "nodenext",
     "target": "es2022",
-    "lib": ["es2022"], // Add this for modern JS features
+    "lib": ["es2022"], 
     "skipLibCheck": true,
     
-    // REMOVE "types": [] or change it to:
     "types": ["node"],
     "baseUrl": ".",
     "paths": {

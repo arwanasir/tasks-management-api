@@ -17,8 +17,6 @@ export async function create(title:string,userId:string, description?:string):Pr
     catch(e){
         console.error(e);
         return null;
-    
-
 }};
 
 export async function listTasks(userId:string,status?:string):Promise<Task[]>{

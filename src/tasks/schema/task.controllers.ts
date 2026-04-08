@@ -3,7 +3,7 @@ import {create, listTasks,getTaskById,updateTask,deleteTask } from "../tasks.rep
 export async function createTaskHandler(request:any,reply:any){
     {
                 const {id:userId} = request.user as {id:string};
-                const {title, status} = request.body as {title?:string,status?:string}
+                const {title, status} = request.body as {title:string,status?:string}
                 const update_tasks = await create(userId,title,status);
             
             if(!update_tasks){

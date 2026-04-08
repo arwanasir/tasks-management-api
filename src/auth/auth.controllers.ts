@@ -3,7 +3,7 @@ import bcrypt from 'bcrypt';
 import { createUser,findUserByEmail } from "./auth.repository.js";
 
 export async function registerHandler(req:FastifyRequest,reply:FastifyReply){
-    const {email,passwordHash} = req.body as {email:string,passwordHash:string};
+    const {email,password} = req.body as {email:string,password:string};
   const findUser = await findUserByEmail(email);
   if(findUser){
     return reply.code(400).send({
@@ -11,7 +11,7 @@ export async function registerHandler(req:FastifyRequest,reply:FastifyReply){
     });
   };
   try{
-    const create_user = await createUser(email,passwordHash);
+    const create_user = await createUser(email,password);
     return reply.code(201).send({
       id:create_user.id,
       name:create_user.name,
@@ -27,7 +27,7 @@ export async function registerHandler(req:FastifyRequest,reply:FastifyReply){
 export async function loginHandler(req:FastifyRequest,reply:FastifyReply){
     try{
 
-      const {email,passwordHash} = req.body as {email:string,passwordHash:string};
+      const {email,password} = req.body as {email:string,password:string};
       const find_user = await findUserByEmail(email);
 
       if(!find_user){
@@ -36,7 +36,7 @@ export async function loginHandler(req:FastifyRequest,reply:FastifyReply){
         message: 'User doesnt exists with this email',
       });
       };
-      const isValid = find_user && (await bcrypt.compare(passwordHash,find_user.passwordHash));
+      const isValid = find_user && (await bcrypt.compare(password,find_user.passwordHash));
 
       if (!isValid) {
         return reply.code(401).send({

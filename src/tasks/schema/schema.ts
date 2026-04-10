@@ -1,4 +1,4 @@
-import { taskResponse,errorResponse } from "./response.js"; 
+import { taskResponse} from "./response.js"; 
 
 export const createTaskSchema = {
             body:{
@@ -12,7 +12,6 @@ export const createTaskSchema = {
             },
             response:{
                 201:taskResponse,
-                500:errorResponse
 
             }
         };
@@ -27,7 +26,6 @@ export const getTaskSchema = {
             },
             response:{
                 200:taskResponse,
-                404:errorResponse
             }
         };
 
@@ -38,8 +36,7 @@ export const getByIdSchema = {
                     id:{type:'string'},
 }},
         response:{
-            200:taskResponse,
-            404:errorResponse
+            200:taskResponse
             }};
 
 
@@ -61,7 +58,6 @@ export const putTaskSchema ={
             },
             response:{
                 200:taskResponse,
-                404:errorResponse
             }
         
         };
@@ -77,7 +73,6 @@ export const deleteTaskSchema = {
                 204:{
                     type:'object',
                 },
-            404:errorResponse
             
         }
     };

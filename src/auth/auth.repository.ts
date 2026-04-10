@@ -1,8 +1,8 @@
 import bcrypt from 'bcrypt';
-import prisma from '../prisma/client.js';
+import { PrismaClient } from '@prisma/client/extension';
 import { User } from 'generated/prisma/index.js';
 
-export async function createUser(email:string,passwordHash:string):Promise<User>{
+export async function createUser(prisma:PrismaClient,email:string,passwordHash:string):Promise<User>{
     const hash = await bcrypt.hash(passwordHash,10);
         const user = await prisma.user.create({
             data:{
@@ -14,7 +14,7 @@ export async function createUser(email:string,passwordHash:string):Promise<User>
     
 };
 
-export async function findUserByEmail(email:string):Promise<User | null>{
+export async function findUserByEmail(prisma:PrismaClient,email:string):Promise<User | null>{
     const findUser = await prisma.user.findUnique({
         where:{
             email

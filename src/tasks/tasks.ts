@@ -3,15 +3,7 @@ import { createTaskSchema,getTaskSchema,getByIdSchema,putTaskSchema,deleteTaskSc
 import { createTaskHandler,listTaskHandler,getByIdHandler,updateTaskHandler,deleteTaskHandler } from "src/tasks/schema/task.controllers.js";
 
 export async function taskRoutes(fastify:FastifyInstance){
-    fastify.addHook('onRequest',async(request,reply)=>{
-        try{
-            await request.jwtVerify();
-        }
-        catch(e){
-            reply.code(401).send({error:'unauthorized. please log in!'})
-
-        }
-    })
+   
     fastify.route({
         method:'POST',
         url:'/tasks',

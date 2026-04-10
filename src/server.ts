@@ -1,18 +1,23 @@
 import fastify from 'fastify';
-import fastifyJwt from "@fastify/jwt";
 import { taskRoutes } from './tasks/tasks.js';
 import { userRoutes } from './auth/auth.routess.js';
-import * as dotenv from 'dotenv';
-dotenv.config();
+import prismaPlugin from './plugins/prisma.js';
+import authPlugin from './plugins/auths.js';
+import errorHandler from './plugins/error-handler.js';
+import swaggerPlugin from './plugins/swagger.js';
 
-const server = fastify();
+const server = fastify({logger:{
+    transport: {
+      target: 'pino-pretty'
+    }
+}});
 server.register(taskRoutes);
 
-server.register(fastifyJwt,{
-    secret:process.env.SECRET_KEY! 
-});
-
 server.register(userRoutes,{prefixes:'/auth'});
+server.register(prismaPlugin);
+server.register(authPlugin);
+server.register(errorHandler);
+server.register(swaggerPlugin);
 
 const start = async ()=>{
     try{

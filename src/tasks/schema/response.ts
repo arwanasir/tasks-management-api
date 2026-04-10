@@ -11,11 +11,3 @@ export const taskResponse = {
         }
                 
 };
-
-export const errorResponse = {
-    type:'object',
-        properties:{
-            error:{type:'string'}
-        }
-                
-}

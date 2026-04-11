@@ -50,6 +50,7 @@
 // }
 {
   "compilerOptions": {
+    "isolatedModules": true,
     "rootDir": "./",
     "outDir": "./dist",
     "moduleResolution": "nodenext",
@@ -62,7 +63,7 @@
     "lib": ["es2022"], 
     "skipLibCheck": true,
     
-    "types": ["node"],
+    "types": ["node","jest"],
     "baseUrl": ".",
     "paths": {
       "@prisma/client": ["./generated/prisma"]

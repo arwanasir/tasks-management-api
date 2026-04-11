@@ -1,6 +1,6 @@
 import { FastifyInstance } from "fastify";
-import { createTaskSchema,getTaskSchema,getByIdSchema,putTaskSchema,deleteTaskSchema } from "src/tasks/schema/schema.js";
-import { createTaskHandler,listTaskHandler,getByIdHandler,updateTaskHandler,deleteTaskHandler } from "src/tasks/schema/task.controllers.js";
+import { createTaskSchema,getTaskSchema,getByIdSchema,putTaskSchema,deleteTaskSchema } from "./schema/schema.js";
+import { createTaskHandler,listTaskHandler,getByIdHandler,updateTaskHandler,deleteTaskHandler } from "../tasks/schema/task.controllers.js";
 
 export async function taskRoutes(fastify:FastifyInstance){
    

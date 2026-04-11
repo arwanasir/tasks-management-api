@@ -1,19 +1,20 @@
 # tasks-management-api
 
-# Week 4: Tasks API with Authentication & Authorization
+# Week 5: Advanced Architecture & Containerization
 
 ## Overview
 
-This project is a secure RESTful API built using **Fastify**, **PostgreSQL**, and **Prisma**. Building on the Week 3 foundation, this version introduces a complete **Authentication and Authorization** system, ensuring that tasks are private and accessible only to their owners.
+This project is an enterprise-ready RESTful API built using **Fastify**, **PostgreSQL**, and **Prisma**. Building on previous foundations, this version implements a **Modular Architecture** using the **Repository Pattern**, full **Dockerization**, and automated **Swagger/OpenAPI Documentation**.
 
 ## Tech Stack
 
-- **Node.js** & **TypeScript**
+- **Node.js** (v24.x) & **TypeScript**
 - **Fastify**: High-performance web framework.
-- **PostgreSQL**: Relational database.
+- **PostgreSQL**: Relational database running in **Docker**.
 - **Prisma ORM**: Type-safe database client.
-- **bcrypt**: For secure password hashing.
-- **@fastify/jwt**: For JSON Web Token-based authentication.
+- **Pino**: Structured logging.
+- **Swagger/OpenAPI**: Automated API documentation.
+- **Jest**: Unit and Integration testing.
 
 ## Features
 
@@ -23,20 +24,45 @@ This project is a secure RESTful API built using **Fastify**, **PostgreSQL**, an
 - **Validation**: Comprehensive JSON schema validation for request bodies, parameters, and queries.
 - **Layered Architecture**: Clear separation of concerns between Routes, Handlers, and Repository logic.
 
+## Week 5 Features
+
+- **Repository Pattern**: Abstracted data-access layer to decouple business logic from the database implementation.
+- **Dockerization**: Fully containerized PostgreSQL environment ensuring environment consistency.
+- **Interactive API Docs**: Integrated **Swagger UI** for real-time API testing and documentation.
+- **Data Normalization**: Automated title formatting and URL-friendly **Slug** generation for every task.
+- **Unit Testing**: 100% pass rate on core utility functions (Formatters/Slugs) using Jest.
+
 ## Project Structure
 
-```
+## Project Structure
+
+```text
 week3-tasks-api/
+├ docker-compose.yml
+├ DockerFile   # Container orchestration
 ├ prisma/
+│  └ schema.prisma       # Database models
 ├ src/
-│  ├ prisma/
+│  ├ tasks/
+      ├ prisma/
+│  │  ├ tasks.repository.ts # Data Access Layer
+│  │  ├ tasks.routes.ts     # Route definitions
 │  ├ auth/
-   ├server.ts
-   ├tasks/
-   ├package.json
-   ├.gitignore
-   ├.env
-   ├tsconfig.json
+      ├ schema/
+      ├ auth.controllers.ts
+      ├ auth.repository.ts
+      ├ auth.routess.ts
+│  ├ utils/
+│  │  └ formatter.ts        # Data normalization logic
+│  ├ plugins/
+│  │  ├ prisma.ts
+      ├ auths.ts
+      ├ error-handler.ts           # DB connection management
+│  │  └ swagger.ts          # API Documentation config
+│  └ server.ts              # Entry point
+├ .gitignore
+├ .dockerignore
+
 ```
 
 ## Prerequisites
@@ -82,6 +108,14 @@ npx prisma migrate dev --name init
 npx ts-node server.ts
 ```
 
+### API Documentation
+
+Once the server is running, access the interactive Swagger UI to test all endpoints:
+
+```bash
+ http://localhost:3000/docs
+```
+
 ### API Endpoints
 
 **Note:** All Task endpoints require a valid JWT in the `Authorization` header: `Bearer <token>`.
@@ -95,3 +129,11 @@ npx ts-node server.ts
 | **GET**    | `/tasks/:id` | Get task details (Ownership check enforced).         | 200, 404     |
 | **PUT**    | `/tasks/:id` | Update task title/status (Ownership check enforced). | 200, 404     |
 | **DELETE** | `/tasks/:id` | Remove a task (Ownership check enforced).            | 204, 404     |
+
+### Testing
+
+Run the test suite to verify business logic and formatting:
+
+```bash
+npm test
+```

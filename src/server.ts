@@ -6,20 +6,22 @@ import authPlugin from './plugins/auths.js';
 import errorHandler from './plugins/error-handler.js';
 import swaggerPlugin from './plugins/swagger.js';
 
-const server = fastify({logger:{
-    transport: {
-      target: 'pino-pretty'
-    }
-}});
-server.register(taskRoutes);
+export const buildApp = async() =>{
 
-server.register(userRoutes,{prefixes:'/auth'});
-server.register(prismaPlugin);
-server.register(authPlugin);
-server.register(errorHandler);
-server.register(swaggerPlugin);
+    const server = fastify({logger:true});
+    server.register(taskRoutes);
+
+    server.register(userRoutes,{prefixes:'/auth'});
+    server.register(prismaPlugin);
+    server.register(authPlugin);
+    server.register(errorHandler);
+    server.register(swaggerPlugin);
+
+    return server;
+}
 
 const start = async ()=>{
+    const server = await buildApp();
     try{
         await server.listen({port:3000,host:'0.0.0.0'});
     console.log('server running on http://localhost:3000')

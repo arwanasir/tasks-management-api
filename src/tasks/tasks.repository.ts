@@ -1,13 +1,17 @@
 import { Task } from "generated/prisma/index.js";
 import { PrismaClient } from "@prisma/client/extension";
+import { formatTaskTitle,createSlug } from "../utils/formatter.js";
 
 export async function create(prisma:PrismaClient,title:string,userId:string, description?:string):Promise<Task | null> {  
     try{
+        const formattedTitle = formatTaskTitle(title);
         const task = await prisma.task.create({
         data:{
-            title,
+            title:formattedTitle,
+            slug:createSlug(title),
             userId,
-            description
+            description,
+
         }
     });
     return task;

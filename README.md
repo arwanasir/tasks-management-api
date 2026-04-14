@@ -37,7 +37,7 @@ This project is an enterprise-ready RESTful API built using **Fastify**, **Postg
 ## Project Structure
 
 ```text
-week3-tasks-api/
+tasks-management-api/
 ├ docker-compose.yml
 ├ DockerFile   # Container orchestration
 ├ prisma/

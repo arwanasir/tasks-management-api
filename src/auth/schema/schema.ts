@@ -7,6 +7,7 @@ export const registerSchema = {
                 properties:{
                     email:{type:'string'},
                     password:{type:'string'},
+                    name:{type:'string'}
                 }
             
         },
@@ -21,7 +22,8 @@ export const loginSchema = {
          type:'object',
         required:['email'],
         properties:{
-            email:{type:'string'}
+            email:{type:'string'},
+            password:{type:'string'}
     }
     },
     response:{

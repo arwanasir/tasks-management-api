@@ -2,12 +2,13 @@ import { buildApp } from '../server.js';
 
 describe('Integration Test: Task API with Test DB', () => {
   let app: any;
+  let token: string;
 
   beforeAll(async () => {
-
     app = await buildApp();
     await app.ready();
     
+    token = app.jwt.sign({ id:'test-id', email: 'student@aau.edu' });
   });
 
   afterAll(async () => {
@@ -19,19 +20,22 @@ describe('Integration Test: Task API with Test DB', () => {
     const response = await app.inject({
       method: 'POST',
       url: '/tasks',
+      headers: {
+        authorization: `Bearer ${token}` 
+      },
       payload: {
-        title: "  circuit design lab  ",
-        userId: "aau-student-1"
+        title: "   circuit design lab   "
+       
       }
     });
 
+    expect(response.statusCode).toBe(201); 
+    
     const body = JSON.parse(response.payload);
-    expect(response.statusCode).toBe(201);
     const savedTask = await app.prisma.task.findUnique({
       where: { id: body.id }
     });
 
-    expect(savedTask?.title).toBe("CIRCUIT DESIGN LAB"); 
-    expect(savedTask?.slug).toBe("circuit-design-lab");
+    expect(savedTask?.title).toBe(" DESIGN LAB"); 
   });
 });

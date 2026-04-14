@@ -1,12 +1,12 @@
 import { taskResponse} from "./response.js"; 
 
 export const createTaskSchema = {
+    security: [{ bearerAuth: [] }],
             body:{
                 type:'object',
-                required:['userId','title'],
+                required:['title'],
                 properties:{
                     title:{type:'string'},
-                    userId:{type:'string'},
                     description: {type: 'string'}
                 }
             },
@@ -17,19 +17,22 @@ export const createTaskSchema = {
         };
 
 export const getTaskSchema = {
+    security: [{ bearerAuth: [] }],
             querystring:{
                 type:'object',
                 properties:{
-                    userId:{type:'string'},
                     status:{type:'string'},
                 }
             },
             response:{
-                200:taskResponse,
+                200:{
+                    type:'array',
+                    items:taskResponse,
             }
-        };
+        }};
 
 export const getByIdSchema = {
+    security: [{ bearerAuth: [] }],
         params:{
             type:'object',
                 properties:{
@@ -41,6 +44,7 @@ export const getByIdSchema = {
 
 
 export const putTaskSchema ={
+    security: [{ bearerAuth: [] }],
             params:{
                 type:'object',
                 properties:{
@@ -63,6 +67,7 @@ export const putTaskSchema ={
         };
 
 export const deleteTaskSchema = {
+    security: [{ bearerAuth: [] }],
         params:{
             type:'object',
             properties:{

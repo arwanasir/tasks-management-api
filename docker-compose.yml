@@ -4,11 +4,11 @@ services:
     ports:
       - '3000:3000'
     environment:
-      - DATABASE_URL=postgresql://user:password@db:5432/task_db
+      - DATABASE_URL=postgresql://user:password@db:5432/tasks_db
     depends_on:
       - db
   db:
-    image: postgres:15-alphine
+    image: postgres:15-alpine
     restart: always  
     environment:
       POSTGRES_USER: postgres

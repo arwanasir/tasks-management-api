@@ -5,11 +5,3 @@ node_modules
 /generated/prisma
 dist
 *.log
-
-
-.postman/
-postman/
-*.postman_collection.json
-*.-d
-*.-H
-*.postman_environment.json

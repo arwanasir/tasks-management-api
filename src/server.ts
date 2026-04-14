@@ -9,13 +9,13 @@ import swaggerPlugin from './plugins/swagger.js';
 export const buildApp = async() =>{
 
     const server = fastify({logger:true});
-    server.register(taskRoutes);
-
-    server.register(userRoutes,{prefixes:'/auth'});
-    server.register(prismaPlugin);
-    server.register(authPlugin);
-    server.register(errorHandler);
     server.register(swaggerPlugin);
+     server.register(prismaPlugin);
+     server.register(authPlugin);
+    server.register(taskRoutes);
+    server.register(userRoutes,{prefix:'/auth'});
+    server.register(errorHandler);
+    
 
     return server;
 }

@@ -9,8 +9,8 @@ export default fp(async(fastify:FastifyInstance) => {
     })
 
     fastify.addHook('onRequest',async(request,reply)=>{
-        const path = request.routeOptions?.url
-            if(path === '/logins' || path === '/register'){
+        console.log(request.headers);
+            if(request.url.includes('/auth/login') || request.url.includes('/auth/register') || request.url.includes('/docs')){
                 return;
             };
 
@@ -18,7 +18,8 @@ export default fp(async(fastify:FastifyInstance) => {
             await request.jwtVerify();
         }
         catch(e){
-            reply.code(401).send({error:'unauthorized. please log in!'})
+            fastify.log.error(e)
+            return reply.code(401).send({error:'unauthorized.!'})
 
         }
     })
